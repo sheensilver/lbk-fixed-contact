@@ -1,0 +1,367 @@
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+#lbkfc h2 {
+    font-size: 2.2em;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+.social-icons {
+    padding: 15px;
+}
+.social-icon {
+    position: relative;
+    flex-basis: 12.5%;
+    max-width: 12.5%;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.social-icon img {
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+.social-icon.active img {
+    opacity: 1;
+    filter: grayscale(0%);
+}
+.fixed-contact-container {
+    display: flex;
+    column-gap: 15px;
+    max-width: 1200px;
+    min-height: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 10px;
+    background: #fff;
+
+}
+.right-group,
+.left-group {
+    flex-grow: 1;
+    height: inherit;
+}
+.left-group {
+    max-width: 700px;
+}
+.tooltip {
+    position: absolute;
+    top: -7px;
+    left: 0;
+    transform: translateY(-100%);
+    display: inline-block;
+    padding: 3px 10px;
+    /*border: 1px solid;*/
+    border-radius: 7px;
+    background-color: #fff;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s;
+}
+.tooltip:after {
+    position: absolute;
+    bottom: -6px;
+    left: 5px;
+    content: "";
+    border: 6px solid #fff;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+}
+.social-icon:hover .tooltip {
+    left: 10px;
+    opacity: 1;
+    visibility: visible;
+}
+.social-setting {
+	margin-bottom: 30px;
+}
+.social-setting .social-title {
+	display: inline-block;
+	min-width: 150px;
+	font-weight: bold;
+}
+.social-setting input {
+	display: inline-block;
+	min-width:  300px;
+	line-height: 40px;
+}
+.close-button  {
+    padding: 7px ;
+	background-color: red;
+}
+.close-button,
+.up-button,
+.down-button {
+    box-sizing: border-box;
+	display: inline-flex;
+	margin-left: 15px;
+	height: 40px;
+	vertical-align: middle;
+	text-align: center;
+	line-height: 40px;
+	font-size: 18px;
+
+	border: 1px solid;
+	border-radius: 7px;
+	cursor: pointer;
+}
+.close-button:active,
+.up-button:active,
+.down-button:active {
+    box-shadow: 0 0  5px 5px rgba(0,0,0,0.5) inset;
+}
+.close-button img,
+.up-button img ,
+.down-button img {
+    width: 100%;
+    height: 100%;
+}
+.button.save-all {
+	padding: 3px 10px;
+	border-radius: 5px;
+	background-color: green;
+	color: #fff;
+}
+
+.right-group {
+    display: flex;
+}
+
+.right-group .device-button-group {
+    position: absolute;
+    display: flex;
+    top: 50%;
+    left: -90px;
+    transform: rotate(90deg);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #ccc;
+}
+.device-button {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+    font-style: italic;
+    cursor: pointer;
+}
+.device-button.active {
+    background: green;
+    color: #fff;
+}
+.right-group .fc-preview-screen {
+    position: sticky;
+    /*position: -webkit-sticky;*/
+    top: 60px;
+    left: 0;
+    margin-left: auto;
+    width: 350px;
+    height: 197px;
+    border-radius: 10px;
+    background: #ccc;
+    transition: 0.3s;
+}
+.right-group .fc-preview-inner  {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+}
+.right-group .fc-preview-inner .list-icons {
+    position: absolute;
+}
+.list-icons.left-bottom {
+    left: 15px;
+    bottom: 15px;
+}
+.list-icons.left-center {
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.list-icons.right-bottom {
+    right: 15px;
+    bottom: 15px;
+}
+.list-icons.right-center {
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.right-group .fc-preview-inner .icon {
+    cursor: pointer;
+    border-radius: 99px;
+    overflow: hidden;
+    width: 20px;
+    height: 20px;
+}
+.right-group .fc-preview-inner .icon:not(:last-child) {
+    margin-bottom: 5px;
+}
+.right-group .fc-preview-inner .icon img {
+    width: 100%;
+    height: 100%;
+}
+.right-group .fc-preview-inner .icon.toggle-icon {
+    padding: 2px;
+    background-color: green;
+   
+}
+.fc-overlay-wrapper {
+    display: none;
+}
+.fc-overlay-inner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.3);
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+}
+.fc-overlay {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 250px;
+    padding: 30px;
+    display: flex; 
+    border-radius: 15px;
+    background: #fff;
+}
+.fc-finished {
+    margin-bottom: 20px;
+}
+.fc-spin {
+  padding: 0px !important;
+  margin-bottom: 30px;
+  width: 30px;
+  height: 30px;
+  border: 5px solid #0CB1C4;
+  border-left-color: transparent;
+  border-radius: 999px;
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(.25,.75,.75,.25); 
+}
+.fc-overlay .message {
+    font-style: italic;
+    font-size: 22px;
+    font-weight: bold;
+}
+/*form*/
+.fc-input-group {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    line-height: 30px;
+}
+.fc-field-label {
+    display: inline-block;
+    width: 100%;
+    max-width: 150px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+#lbkfc .select select {
+  /* Reset Select */
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  /* Personalize */
+  flex: 1;
+  padding: 0 1em;
+  /*color: #fff;*/
+  background-color: #ebebeb;
+  cursor: pointer;
+}
+/* Remove IE arrow */
+#lbkfc .select select::-ms-expand {
+  display: none;
+}
+#lbkfc .select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  border-radius: .25em;
+  overflow: hidden;
+}
+/* Arrow */
+#lbkfc .select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  background-color: #ebebeb;
+  transition: .25s all ease;
+  pointer-events: none;
+}
+.switch-field {
+    display: flex;
+    overflow: hidden;
+}
+
+.switch-field input {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
+}
+
+.switch-field label {
+    background-color: #ebebeb;
+    line-height: 1;
+    text-align: center;
+    padding: 0.5em 1em;
+    margin-right: -1px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+    cursor: pointer;
+}
+
+.switch-field input:checked + label {
+    background-color: green;
+    color: #fff;
+    box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+    border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+    border-radius: 0 4px 4px 0;
+}
+input[type=number] {
+    margin-right: 7px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
