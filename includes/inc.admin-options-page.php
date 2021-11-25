@@ -6,8 +6,8 @@
             <div class="social-icons flex">
                 <?php 
 
-                    $socials_info = unserialize(get_option('lbk_fc_defaulf_socials'));
-                    $socials_data = unserialize(get_option('lbk_fc_setting_data'));
+                    $socials_info = get_option('lbk_fc_defaulf_socials');
+                    $socials_data = get_option('lbk_fc_setting_data');
 
                     foreach ($socials_info as $index => $social_info) {
                         foreach ($socials_data['list_socials'] as $key => $social_data) {
@@ -17,7 +17,7 @@
                             }
                         }
                         ?>
-                            <div class ="social-icon <?php echo $activeClass ? 'active' : '' ?>" active-attr= <?php echo $activeClass ? 'true' : 'false' ?> social-key=<?php echo esc_html()($social_info['slug']) ?>  social-index=<?php echo esc_attr($index); ?>>
+                            <div class ="social-icon <?php echo $activeClass ? 'active' : '' ?>" active-attr= <?php echo $activeClass ? 'true' : 'false' ?> social-key=<?php echo esc_html(($social_info['slug'])) ?>  social-index=<?php echo esc_attr($index); ?>>
                                 <img src="<?php echo esc_url(LBK_FC_URL . 'assets/images/' . $social_info['image']); ?>" style="width: 40px; height: 40px; margin: auto;">
                                 <span class="tooltip"><?php echo esc_html($social_info['title']); ?></span>
                             </div>
@@ -116,6 +116,7 @@
                 <div class="fc-overlay">
                     <div class="fc-spin-icon fc-spin"></div>
                     <div class="fc-finished" style="display: none"><img width="100" height="100" src="<?php echo esc_url(LBK_FC_URL . 'assets/images/checked.svg'); ?>" /></div>
+                    <div class="fc-failed" style="display: none"><img width="100" height="100" src="<?php echo esc_url(LBK_FC_URL . 'assets/images/close.svg'); ?>" /></div>
                     <div class="message">Đang lưu ... </div>
                 </div>
             </div>
@@ -127,9 +128,9 @@
             $(document).ready(function(){
 
                 var socialsData = <?php echo json_encode($socials_info,JSON_FORCE_OBJECT);?>;
-                var fcOptions = <?php echo json_encode($socials_data);?>;
+                var fcOptions = <?php echo json_encode($socials_data) ;?>;
 
-                console.log(fcOptions.list_socials);
+                // console.log(fcOptions.list_socials);
 
                 buildingSettingIcons(fcOptions.list_socials);
                 
@@ -169,7 +170,7 @@
                 $('.fc-setting').on('change', '.input-element', function() {
                     field = $(this).attr('data-field');
                     bindingInputData( field, null , fcOptions, $(this));
-                    console.log(fcOptions.fc_position);
+                    // console.log(fcOptions.fc_position);
                 })
 
                 $('.device-button').click(function() {
@@ -202,29 +203,58 @@
                             
                             if(response.success) {
 
-                                console.log(response.data);
+                                $('.icons-setting .social-setting input[input-field-data ="url"]').removeClass("field-error");
+                                $('.icons-setting .social-setting input[input-field-data ="placeholder"]').removeClass("field-error");
+
+                                var successIcon = '<img width="100" height="100" src= "'+ "" +'"/>';
+
+                                $('.fc-overlay-wrapper .fc-spin-icon').hide();
+                                $('.fc-overlay-wrapper .fc-finished').show();
+                                $('.fc-overlay-wrapper .message').html('Đã lưu');
+
+                                setTimeout(function(){
+                                    $('.fc-overlay-wrapper .message').html('Đang lưu');
+                                    $('.fc-overlay-wrapper').hide(); 
+                                    $('.fc-overlay-wrapper .fc-spin-icon').show();
+                                    $('.fc-overlay-wrapper .fc-finished').hide();
+                                }, 1000);
                             }
+
                             else {
-                                alert('Đã có lỗi xảy ra');
+                                response.data.forEach(function (socialStatus, index) {
+                                    var currentSocial = $($('.icons-setting .social-setting input[input-field-data ="url"]')[index]);
+
+                                    if( !socialStatus.url ) {
+                                        if( !currentSocial.hasClass("field-error") ) {
+                                             currentSocial.addClass("field-error");
+                                        }
+                                    }
+                                    console.log();
+                                });
+                                
+
+                                $('.fc-overlay-wrapper .fc-spin-icon').hide();
+                                $('.fc-overlay-wrapper .fc-failed').show();
+                                $('.fc-overlay-wrapper .message').html('Lưu thất bại');
+
+                                setTimeout(function(){
+                                    $('.fc-overlay-wrapper .message').html('Đang lưu');
+                                    $('.fc-overlay-wrapper').hide(); 
+                                    $('.fc-overlay-wrapper .fc-spin-icon').show();
+                                    $('.fc-overlay-wrapper .fc-failed').hide();
+                                }, 1000);
+
                             }
-                            var successIcon = '<img width="100" height="100" src= "'+ "" +'"/>';
 
-                            $('.fc-overlay-wrapper .fc-spin-icon').hide();
-                            $('.fc-overlay-wrapper .fc-finished').show();
-                            $('.fc-overlay-wrapper .message').html('Đã lưu');
 
-                            setTimeout(function(){
-                                $('.fc-overlay-wrapper').hide(); 
-                                $('.fc-overlay-wrapper .fc-spin-icon').show();
-                                $('.fc-overlay-wrapper .fc-finished').hide();
-                            }, 1000);
-                            
 
-                            
                         },
-                        error: function( jqXHR, textStatus, errorThrown ){
+                        error: function( jqXHR, textStatus, errorThrown, ){
                             //Làm gì đó khi có lỗi xảy ra
+                            console.log(jqXHR);
                             console.log( 'The following error occured: ' + textStatus, errorThrown );
+
+                            
                         }
                     })
                     return false;
@@ -274,7 +304,6 @@
                                 if( addMore == false ) {
                                     return false;
                                 }
-                                console.log(addMore);
                             }
                              
                             $( this ).addClass('active');
@@ -341,7 +370,6 @@
                 }
             }
             function previewFc (socialIcons) {
-                console.log(socialIcons);
                 socialsItem = '';
                 socialIcons.forEach( ({slug,image}, index) => {
                     socialsItem += '<div class = "icon" social-slug-data ="' + slug + '" ><img src="' + "<?php echo esc_url(LBK_FC_URL) . 'assets/images/'; ?>" + image + '"/></div>';   
@@ -361,6 +389,4 @@
 
         })(jQuery)
     </script>
-
-   
 </div>

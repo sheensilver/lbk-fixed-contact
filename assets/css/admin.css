@@ -85,6 +85,9 @@
 	min-width:  300px;
 	line-height: 40px;
 }
+.social-setting input.field-error {
+    border-color: red !important;
+}
 .close-button  {
     padding: 7px ;
 	background-color: red;

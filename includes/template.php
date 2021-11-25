@@ -5,13 +5,12 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 function lbk_fc_template() {
     // Get the general settings options
-    $socials_option = unserialize(get_option('lbk_fc_setting_data'));
+    $socials_option = get_option('lbk_fc_setting_data');
     $socials_icon = $socials_option['list_socials'];
     $icon_size = $socials_option['social_icon_size'];
     $fc_position = $socials_option['fc_position'];
     $toggle__effect = $socials_option['toggle_icon_effect'];
     $fc_trigger = $socials_option['fc_trigger'];
-
 
     ?>
 

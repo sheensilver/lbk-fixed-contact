@@ -183,7 +183,7 @@ if ( !class_exists( 'lbkFc_Admin' ) ) {
             ];
 
             if( empty( get_option('lbk_fc_defaulf_socials') ) ) {
-                update_option('lbk_fc_defaulf_socials', serialize($social_icons));
+                update_option('lbk_fc_defaulf_socials', $social_icons);
             }
 
             $fc_options = array(
