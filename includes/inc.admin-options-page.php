@@ -6,7 +6,7 @@
             <div class="social-icons flex">
                 <?php 
 
-                    $socials_info = get_option('lbk_fc_defaulf_socials');
+                    $socials_info = get_option('lbk_fc_default_socials');
                     $socials_data = get_option('lbk_fc_setting_data');
 
                     foreach ($socials_info as $index => $social_info) {

@@ -14,22 +14,22 @@ function lbk_fc_template() {
 
     ?>
 
-    <div class="lbk-fc-wrapper <?php echo $fc_position;?>" <?php if($fc_trigger = $socials_option['fc_trigger']['delay']['status'] == "true") {echo 'data-delay='.$socials_option['fc_trigger']['delay']['time']; } ?>>
+    <div class="lbk-fc-wrapper <?php echo esc_attr($fc_position);?>" <?php if($fc_trigger['delay']['status'] == "true") {echo 'data-delay='.esc_attr($socials_option['fc_trigger']['delay']['time']); } ?>>
         <div class="lbk-fc-list">
         <?php
             foreach($socials_icon as $key => $social) {
             ?>
                 <div class = "fc-social fc-icon-wrapper" style="width: <?php echo esc_attr($icon_size); ?>; height: <?php echo esc_attr($icon_size)?>; display: <?php echo $fc_trigger['state'] !== 'click' ? 'none' : 'block'; ?>">
-                    <a class="fc-icon" href ="<?php echo $social['url']; ?> ">
+                    <a class="fc-icon" href ="<?php echo esc_url($social['url']); ?> ">
                         <img src="<?php echo LBK_FC_URL . 'assets/images/' . $social['image'];  ?>">
                     </a>
-                    <span class="fc-social-tooltip"><?php echo $social['title'];?></span>
+                    <span class="fc-social-tooltip"><?php echo esc_html($social['title']);?></span>
                 </div>
 
             <?php
             }
         ?>
-            <div class = "fc-icon-wrapper fc-toggle-btn <?php echo $toggle__effect !== 'none' ? ('fc-animation '.$toggle__effect) : ''; ?>" style="width: <?php echo esc_attr($icon_size); ?>; height: <?php echo esc_attr($icon_size)?>"  >
+            <div class = "fc-icon-wrapper fc-toggle-btn <?php echo $toggle__effect !== 'none' ? ('fc-animation '.esc_attr($toggle__effect)) : ''; ?>" style="width: <?php echo esc_attr($icon_size); ?>; height: <?php echo esc_attr($icon_size)?>"  >
                 <div class="fc-icon ">
                     <img src="<?php echo LBK_FC_URL . 'assets/images/message.svg'; ?>">
                 </div> 

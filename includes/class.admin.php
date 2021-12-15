@@ -44,7 +44,7 @@ if ( !class_exists( 'lbkFc_Admin' ) ) {
          */
         public function register_lbk_fc_general_settings() { 
             // Register all settings for general settings page 
-            register_setting( 'lbk_fc_settings', 'lbk_fc_defaulf_socials' );
+            register_setting( 'lbk_fc_settings', 'lbk_fc_default_socials' );
             register_setting( 'lbk_fc_settings', 'lbk_fc_setting_data' );
 
             $social_icons = [
@@ -182,8 +182,8 @@ if ( !class_exists( 'lbkFc_Admin' ) ) {
                 ),
             ];
 
-            if( empty( get_option('lbk_fc_defaulf_socials') ) ) {
-                update_option('lbk_fc_defaulf_socials', $social_icons);
+            if( empty( get_option('lbk_fc_default_socials') ) ) {
+                update_option('lbk_fc_default_socials', $social_icons);
             }
 
             $fc_options = array(
@@ -201,7 +201,7 @@ if ( !class_exists( 'lbkFc_Admin' ) ) {
                 'disable_on_pages' => array()
             );
             if( empty( get_option('lbk_fc_setting_data') ) ) {
-                update_option('lbk_fc_setting_data', serialize($fc_options));
+                update_option('lbk_fc_setting_data', $fc_options);
             }
             
         }
